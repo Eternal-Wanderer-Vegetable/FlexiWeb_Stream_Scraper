@@ -1,0 +1,62 @@
+{
+  "site_name": "Grok",
+  "base_url": "https://grok.com",
+  "selectors": {
+    "input_box": "div[role='textbox'][contenteditable='true']",
+    "submit_button": "button[aria-label*='Grok'], button[aria-label*='发送'], button[aria-label*='Send']",
+    "enter_to_submit": true,
+    
+    "ai_answer_container": "div[data-testid='assistant-message']",
+    
+    "exclude_selectors": [
+      "div.thinking-container",
+      "button[aria-label*='复制']",
+      "button[aria-label*='收起']"
+    ],
+    
+    "markdown_rules": {
+      "div.response-content-markdown p": {
+        "prefix": "",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "正文"
+      },
+      "div.response-content-markdown h1": {
+        "prefix": "# ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "一级标题"
+      },
+      "div.response-content-markdown h2": {
+        "prefix": "## ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "二级标题"
+      },
+      "div.response-content-markdown h3": {
+        "prefix": "### ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "三级标题"
+      },
+      "div.response-content-markdown li": {
+        "prefix": "* ",
+        "suffix": "\n",
+        "type": "final_output",
+        "label": "列表项"
+      },
+      "div.response-content-markdown pre.shiki": {
+        "prefix": "```\n",
+        "suffix": "\n```\n\n",
+        "type": "final_output",
+        "label": "代码块"
+      },
+      "div.response-content-markdown tr": {
+        "prefix": "| ",
+        "suffix": " |\n",
+        "type": "final_output",
+        "label": "表格行"
+      }
+    }
+  }
+}

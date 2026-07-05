@@ -1,0 +1,68 @@
+{
+  "site_name": "Qwen-Chat",
+  "base_url": "https://www.qianwen.com",
+  "selectors": {
+    "input_box": "div[data-slate-editor='true']",
+    "submit_button": "button:has(svg use[xlink\\:href*='sendChat'])",
+    "enter_to_submit": true,
+    
+    "ai_answer_container": "div[class*='message-select-wrapper-answer']",
+    
+    "exclude_selectors": [
+      "div.share-selection-NEsSb3",
+      "div.mb-2.mt-4",
+      "div.reference-wrap-iEjeb3"
+    ],
+    
+    "markdown_rules": {
+      "div.qk-md-paragraph": {
+        "prefix": "",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "正文"
+      },
+      "h1.qk-md-head, h1": {
+        "prefix": "# ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "一级标题"
+      },
+      "h2.qk-md-head, h2": {
+        "prefix": "## ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "二级标题"
+      },
+      "h3.qk-md-head, h3": {
+        "prefix": "### ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "三级标题"
+      },
+      "li.qk-md-li": {
+        "prefix": "* ",
+        "suffix": "\n",
+        "type": "final_output",
+        "label": "列表项"
+      },
+      "pre": {
+        "prefix": "```\n",
+        "suffix": "\n```\n\n",
+        "type": "final_output",
+        "label": "代码块"
+      },
+      "tr.qk-md-table-row, thead.qk-md-table-head tr": {
+        "prefix": "| ",
+        "suffix": " |\n",
+        "type": "final_output",
+        "label": "表格行"
+      },
+      "hr.qk-md-hr": {
+        "prefix": "---\n\n",
+        "suffix": "",
+        "type": "final_output",
+        "label": "分割线"
+      }
+    }
+  }
+}

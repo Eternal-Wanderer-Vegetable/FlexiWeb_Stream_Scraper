@@ -1,0 +1,15 @@
+Set-Content -Path .gitignore -Value "
+.venv/
+*browser_user_data*/
+*browser_user_data/
+extensions/
+fallback/
+logs/
+test_files/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.DS_Store
+Thumbs.db
+" -Encoding utf8

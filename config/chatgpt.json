@@ -1,0 +1,86 @@
+{
+  "site_name": "ChatGPT",
+  "base_url": "https://chatgpt.com",
+  "selectors": {
+    "input_box": "#prompt-textarea",
+    "submit_button": "#composer-submit-button",
+    "enter_to_submit": true,
+    
+    "ai_answer_container": "div[data-turn-id-container]:has(section[data-turn='assistant'])",
+    
+    "exclude_selectors": [
+      "h4.sr-only",
+      "div[aria-label='回复操作']",
+      "div[aria-label='Reply actions']",
+      "button[aria-label='复制']",
+      "button[aria-label='Copy']",
+      "div.pointer-events-none.absolute",
+      ".overflow-visible\\! > div",
+      "div.contents"
+    ],
+    
+    "// markdown_rules": "核心修正：扁平化直接穿透。放弃对抗频繁变动的中间 markdown 类名，直接从已锁定的容器中提取标签",
+    "markdown_rules": {
+      "p": {
+        "prefix": "",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "正文"
+      },
+      "hr": {
+        "prefix": "---\n\n",
+        "suffix": "",
+        "type": "final_output",
+        "label": "分割线"
+      },
+      "blockquote": {
+        "prefix": "> ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "引用块"
+      },
+      "ol > li": {
+        "prefix": "1. ",
+        "suffix": "\n",
+        "type": "final_output",
+        "label": "数字列表"
+      },
+      "ul > li": {
+        "prefix": "* ",
+        "suffix": "\n",
+        "type": "final_output",
+        "label": "无序列表"
+      },
+      "h1": {
+        "prefix": "# ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "一级标题"
+      },
+      "h2": {
+        "prefix": "## ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "二级标题"
+      },
+      "h3": {
+        "prefix": "### ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "三级标题"
+      },
+      "pre.cm-content": {
+        "prefix": "```\n",
+        "suffix": "\n```\n\n",
+        "type": "final_output",
+        "label": "代码块"
+      },
+      "table": {
+        "prefix": "",
+        "suffix": "\n\n",
+        "type": "table_output", 
+        "label": "数据表格"
+      }
+    }
+  }
+}

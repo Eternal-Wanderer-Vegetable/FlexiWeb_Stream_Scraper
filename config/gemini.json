@@ -1,0 +1,78 @@
+{
+  "site_name": "Gemini",
+  "base_url": "https://gemini.google.com/app",
+  "selectors": {
+    "input_box": "rich-textarea .ql-editor[contenteditable='true']",
+    "enter_to_submit": false,
+    "submit_button": "button[aria-label='发送'], button[aria-label='Send']",
+    "ai_answer_container": "structured-content-container.processing-state-visible .markdown.markdown-main-panel",
+    "exclude_selectors": [
+      ".code-block-decoration",
+      ".table-footer",
+      "gem-icon-button",
+      "gem-icon"
+    ],
+    "markdown_rules": {
+      "p": {
+        "type": "final_output",
+        "label": "段落",
+        "prefix": "",
+        "suffix": "\n\n"
+      },
+      "h1": {
+        "type": "final_output",
+        "label": "标题H1",
+        "prefix": "# ",
+        "suffix": "\n\n"
+      },
+      "h2": {
+        "type": "final_output",
+        "label": "标题H2",
+        "prefix": "## ",
+        "suffix": "\n\n"
+      },
+      "h3": {
+        "type": "final_output",
+        "label": "标题H3",
+        "prefix": "### ",
+        "suffix": "\n\n"
+      },
+      "h4": {
+        "type": "final_output",
+        "label": "标题H4",
+        "prefix": "#### ",
+        "suffix": "\n\n"
+      },
+      "ul": {
+        "type": "final_output",
+        "label": "无序列表",
+        "prefix": "",
+        "suffix": "\n"
+      },
+      "ol": {
+        "type": "final_output",
+        "label": "有序列表",
+        "prefix": "",
+        "suffix": "\n"
+      },
+      "pre": {
+        "type": "final_output",
+        "label": "代码块",
+        "prefix": "```\n",
+        "suffix": "\n```\n\n"
+      },
+      "blockquote": {
+        "type": "final_output",
+        "label": "引用块",
+        "prefix": "> ",
+        "suffix": "\n\n"
+      },
+      "table": {
+        "type": "final_output",
+        "label": "表格",
+        "prefix": "",
+        "suffix": "\n\n"
+      }
+    }
+  }
+}

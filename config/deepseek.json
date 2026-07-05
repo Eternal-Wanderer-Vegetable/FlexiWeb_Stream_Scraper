@@ -1,0 +1,59 @@
+{
+  "site_name": "DeepSeek-Chat",
+  "base_url": "https://chat.deepseek.com",
+  "selectors": {
+    "input_box": "textarea[placeholder*='给 DeepSeek 发送消息']",
+    "submit_button": "textarea[placeholder*='给 DeepSeek 发送消息'] ~ button",
+    "enter_to_submit": true,
+    
+    "// ai_answer_container": "核心修正：选择最后一个属于助理(assistant)或包含 markdown 渲染的 AI 回复气泡，不再误抓用户提问",
+    "ai_answer_container": "div.ds-message:has(.ds-markdown):last-child, div.ds-message:has(.ds-think-content):last-child",
+    
+    "exclude_selectors": [],
+    
+    "markdown_rules": {
+      "ds-think-content": {
+        "prefix": "> ",
+        "suffix": "\n",
+        "type": "think",
+        "label": "思维模型思考"
+      },
+      "p": {
+        "prefix": "",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "正文"
+      },
+      "h1": {
+        "prefix": "# ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "一级标题"
+      },
+      "h2": {
+        "prefix": "## ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "二级标题"
+      },
+      "h3": {
+        "prefix": "### ",
+        "suffix": "\n\n",
+        "type": "final_output",
+        "label": "三级标题"
+      },
+      "li": {
+        "prefix": "* ",
+        "suffix": "\n",
+        "type": "final_output",
+        "label": "列表项"
+      },
+      "pre": {
+        "prefix": "```\n",
+        "suffix": "\n```\n\n",
+        "type": "final_output",
+        "label": "代码块"
+      }
+    }
+  }
+}
