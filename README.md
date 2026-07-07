@@ -6,7 +6,7 @@
 
 (Note: This version of readme.md was translated from the Chinese version by Gemini)
 
-FlexiWeb Stream Scraper is a lightweight AI conversation stream scraper powered by **Playwright** and **FastAPI**. It automates interactions with various AI chat platforms, extracts complete thinking chains (`Think`) alongside the final answer (`Final Output`), and broadcasts the results to downstream Webhook services in real time.
+FlexiWeb Stream Scraper is a lightweight AI chat stream scraping tool built on Playwright and FastAPI, designed to mimic the API services provided by various AI vendors. It automates interactions with major AI chat platforms, extracts the full Chain of Thought (Think) alongside the final output, and broadcasts the results to downstream webhook services in real time.
 
 Whether for data collection, content archiving, or building an AI middleware pipeline, FlexiWeb Stream Scraper offers a stable, efficient automated solution.
 
@@ -30,8 +30,7 @@ Whether for data collection, content archiving, or building an AI middleware pip
   Bundled with a universal cross-platform PowerShell automation script (`universal_setup.ps1`), backed by dedicated platform-native bootstrapper wrappers. It matches target Python versions and constructs isolated, pristine virtual environments natively.
 
 - **📝 Persistent Markdown Logs**  
-  Automatically logs every single conversation session into structured Markdown files for seamless future review and sharing.
-
+  Automatically generates structured Markdown log files for every conversation, making troubleshooting, reviewing, and sharing effortless.
 ---
 
 ## 🚀 Quick Start
@@ -44,8 +43,12 @@ Whether for data collection, content archiving, or building an AI middleware pip
 
 ### 2. Clone or Download the Project
 
+Click the green "Code" button on the main repository page and select "Download ZIP" from the dropdown menu.
+
+Alternatively, you can clone the repository using the following command:
+
 ```bash
-git clone [https://github.com/your-username/flexiweb-stream-scraper.git](https://github.com/your-username/flexiweb-stream-scraper.git)
+git clone https://github.com/Eternal-Wanderer-Vegetable/FlexiWeb_Stream_Scraper.git
 cd flexiweb-stream-scraper
 ```
 
@@ -117,7 +120,7 @@ Upon boot, a standalone backend service spawns locally via FastAPI (listening on
 ```Bash
 curl -X POST "[http://127.0.0.1:8000/api/ask](http://127.0.0.1:8000/api/ask)" \
      -H "Content-Type: application/json" \
-     -d '{"site": "deepseek", "prompt": "请解释一下量子计算的基本原理"}'
+     -d '{"site": "deepseek", "prompt": "Please explain the fundamental principles of quantum computing "}'
 ```
 
 ## 🛠️ Advanced Operations
@@ -196,5 +199,7 @@ This asset is licensed under the terms of the MIT License. Feel free to use, mod
 ## 🌟 Acknowledgements
 
 Heartfelt thanks to @t1mb2rg for insightful exchanges that inspired core architectural elements, alongside the profound backend infrastructure of Gemini, DeepSeek, and open-source milestones like Playwright and FastAPI.
+
+Special thanks to superuika! for participating in testing and submitting bug reports.
 
 This utility undergoes proactive expansion and optimization. If it facilitates your workflows, drop a ⭐ to show your support! For feedback or feature suggestions, submit an Issue, or reach out directly via 1694717255@qq.com.

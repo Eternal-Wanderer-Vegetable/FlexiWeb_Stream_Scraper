@@ -4,7 +4,7 @@
 
 ---
 
-FlexiWeb Stream Scraper 是一个基于 **Playwright** 和 **FastAPI** 的轻量级 AI 对话流式抓取工具。它能够自动化地与各大 AI 对话网站交互，提取完整的思维链（Think）和最终输出（Final Output），并将结果实时广播到下游 Webhook 服务。
+FlexiWeb Stream Scraper 是一个仿照各个AI企业提供的API服务，基于 **Playwright** 和 **FastAPI** 的轻量级 AI 对话流式抓取工具。它能够模仿API的功能，自动化地与各大 AI 对话网站交互，提取完整的思维链（Think）和最终输出（Final Output），并将结果实时广播到下游 Webhook 服务。
 
 无论是用于数据收集、内容归档，还是构建 AI 中间件，FlexiWeb Stream Scraper 都能提供稳定、高效的自动化解决方案。
 
@@ -28,7 +28,7 @@ FlexiWeb Stream Scraper 是一个基于 **Playwright** 和 **FastAPI** 的轻量
   提供跨平台 PowerShell 自动化脚本（`universal_setup.ps1`），并且根据对应系统配备了一键启动的入口脚本，自动匹配 Python 版本并创建干净的虚拟环境。
 
 - **📝 Markdown 日志持久化**  
-  每次对话自动生成结构化的 Markdown 日志文件，方便查阅和分享。
+  每次对话自动生成结构化的 Markdown 日志文件，方便排查问题，查阅和分享。
 
 ---
 
@@ -42,8 +42,12 @@ FlexiWeb Stream Scraper 是一个基于 **Playwright** 和 **FastAPI** 的轻量
 
 ### 2. 克隆或下载项目
 
+点击主界面上的绿色"Code"按钮，在下拉式菜单中点击"Download ZIP"即可下载。
+
+也可以采用如下命令，克隆git仓库：
+
 ```bash
-git clone https://github.com/your-username/flexiweb-stream-scraper.git
+git clone https://github.com/Eternal-Wanderer-Vegetable/FlexiWeb_Stream_Scraper.git
 cd flexiweb-stream-scraper
 ```
 
@@ -192,5 +196,7 @@ flexiweb-stream-scraper/
 ## 🌟 致谢
 
 感谢与@t1mb2rg交流得到的灵感，Gemini、Deepseek等优秀模型以及 Playwright 、 FastAPI 等优秀开源社区的支持。
+
+感谢superuika！参与了测试工作并提交了错误报告。
 
 本项目仍在持续开发与改进中。如果这个工具对你有帮助，别忘了点个 ⭐ 支持！如果有任何问题或建议，请提交 Issue，也可以发送邮件至1694717255@qq.com。

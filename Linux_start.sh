@@ -1,68 +1,58 @@
 #!/bin/bash
 
-# ============================================================
-#   🌐 FlexiWeb Stream Scraper - 1-Click Bootstrapper
-# ============================================================
-
-# Define color codes for cleaner console output
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-NC='\033[0m' # No Color
-
-echo "============================================================"
-echo -e "${BLUE}  🌐 FlexiWeb Stream Scraper - 1-Click Bootstrapper${NC}"
-echo "============================================================"
-echo ""
-
-# Lock current working directory to the script's absolute path
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# 获取当前脚本所在的绝对路径
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
 cd "$SCRIPT_DIR"
 
-# Check if the virtual environment exists
-if [ ! -d ".venv" ]; then
-    echo -e "${YELLOW}[!] Target virtual environment (.venv) not found. Initializing setup script...${NC}"
-    echo ""
-    
-    # Cascade check for available PowerShell core engines
-    if command -v pwsh &> /dev/null; then
-        pwsh -ExecutionPolicy Bypass -File universal_setup.ps1
-    elif command -v powershell &> /dev/null; then
-        powershell -ExecutionPolicy Bypass -File universal_setup.ps1
-    else
-        echo -e "${RED}[ERROR] PowerShell engine not found. Please install pwsh or run manually:${NC}"
-        echo "    python3 -m venv .venv"
-        echo "    source .venv/bin/activate"
-        echo "    pip install -r requirements.txt"
-        echo "    python -m playwright install chromium"
-        exit 1
-    fi
-    
-    # Catch setup initialization failure
-    if [ $? -ne 0 ]; then
-        echo ""
-        echo -e "${RED}[ERROR] Environment provisioning failed. Please check network connection and retry.${NC}"
-        exit 1
-    fi
-    echo ""
-fi
-
-echo -e "${BLUE}[*] Launching FlexiWeb Stream Scraper...${NC}"
-echo -e "${YELLOW}[*] Hint: Press Ctrl+C at any time to safely terminate the process.${NC}"
+echo "============================================================"
+echo "  🌐 FlexiWeb Stream Scraper - Linux Bootstrapper"
+echo "============================================================"
 echo ""
 
-# Bypass activate script to avoid global path confusion; execute through specific absolute pipeline
-"./.venv/bin/python" main.py "$@"
-EXIT_CODE=$? # [修复点 1]: 立刻捕获并锁死 Python 的真实退出码，防止其被随后的判断语句覆盖
-
-# Evaluate structural exit codes
-if [ $EXIT_CODE -ne 0 ]; then
-    echo ""
-    echo -e "${RED}[ERROR] Process terminated abnormally with Exit Code: $EXIT_CODE${NC}"
-    # [修复点 2]: 增加 TTY 输入流检测，确保在 Headless (无终端) 自动化部署下不无限挂起
-    if [ -t 0 ]; then
-        read -p "Press [Enter] to exit..."
-    fi
-    exit $EXIT_CODE
+# 1. 如果存在虚拟环境，直接启动程序
+if [ -d ".venv" ]; then
+    echo "[*] Launching FlexiWeb Stream Scraper..."
+    ./.venv/bin/python3 main.py "$@"
+    exit $?
 fi
+
+# 2. 如果不存在，开始自动化环境供给
+echo "[!] Virtual environment not found. Initializing setup..."
+
+# 探测系统全局 Python3
+if ! command -v python3 &> /dev/null; then
+    echo "[*] No python3 found. Attempting to install via package manager..."
+    if command -v apt-get &> /dev/null; then
+        sudo apt-get update -y && sudo apt-get install -y python3 python3-pip python3-venv
+    elif command -v yum &> /dev/null; then
+        sudo yum install -y python3 python3-pip
+    else
+        echo "[ERROR] Unsupported Linux distribution. Please install python3 manually."
+        exit 1
+    fi
+fi
+
+# 3. 构建虚拟环境
+echo "[*] Constructing pristine virtual environment..."
+python3 -m venv .venv
+
+# 4. 同步依赖
+if [ -f "requirements.txt" ]; then
+    echo "[*] Synchronizing third-party dependencies..."
+    ./.venv/bin/pip install --upgrade pip -q
+    ./.venv/bin/pip install -r requirements.txt
+    
+    # 自动扫描并激活 playwright 浏览器内核
+    if grep -q "playwright" requirements.txt; then
+        echo "[*] Installing Chromium browser kernel..."
+        ./.venv/bin/python3 -m playwright install chromium
+    fi
+fi
+
+echo ""
+echo "[√] Environment deployment completed successfully!"
+echo "[*] Launching FlexiWeb Stream Scraper..."
+echo ""
+
+# 5. 启动主程序
+./.venv/bin/python3 main.py "$@"
