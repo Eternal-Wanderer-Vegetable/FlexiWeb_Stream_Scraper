@@ -1,9 +1,27 @@
 # =====================================================================
-#  Universal Python Environment Provisioning Framework (Safe English)
+#  Universal Python Environment Provisioning Framework (Fixed Syntax)
 # =====================================================================
+param (
+    [string]$TargetVenvDir = ""
+)
+
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
-# ---- 🌐 1. Pure English Localization Dictionary (Immune to Encoding Bugs) ----
+# ---- ⚙️ 1. Configuration & Parameter Definition ----
+$PROJECT_ROOT = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$VERSION_FILE = Join-Path $PROJECT_ROOT "python_version.txt"
+$REQUIREMENTS = Join-Path $PROJECT_ROOT "requirements.txt"
+
+if ([string]::IsNullOrEmpty($TargetVenvDir)) {
+    $TargetVenvDir = Join-Path $PROJECT_ROOT ".venv"
+}
+
+$TARGET_VERSION = "3.11.9" 
+if (Test-Path $VERSION_FILE) {
+    $TARGET_VERSION = (Get-Content $VERSION_FILE).Trim()
+}
+
+# ---- 🌐 2. English Localization Dictionary ----
 $I18N = @{
     "en" = @{
         "start"            = "[*] Launching Universal Automated Provisioning Engine..."
@@ -33,20 +51,6 @@ function _($key, $args_list) {
     return $text
 }
 
-# ---- ⚙️ 2. Configuration & Parameter Definition ----
-$PROJECT_ROOT = Split-Path -Parent $MyInvocation.MyCommand.Definition
-$VERSION_FILE = Join-Path $PROJECT_ROOT "python_version.txt"
-$REQUIREMENTS = Join-Path $PROJECT_ROOT "requirements.txt"
-
-$TARGET_VERSION = "3.11.9" 
-if (Test-Path $VERSION_FILE) {
-    $TARGET_VERSION = (Get-Content $VERSION_FILE).Trim()
-}
-
-param (
-    [string]$TargetVenvDir = (Join-Path $PROJECT_ROOT ".venv")
-)
-
 Write-Host (_ "start") -ForegroundColor Cyan
 
 $HasRequirements = $true
@@ -60,6 +64,7 @@ Write-Host (_ "check_py") -ForegroundColor Gray
 $PythonCmd = if ($IsWindows) { "python" } else { "python3" }
 $HasPython = Get-Command $PythonCmd -ErrorAction SilentlyContinue
 $NeedTemporaryInstall = $true
+$GlobalPythonPath = ""
 
 if ($HasPython) {
     $CurrentVersionStr = (& $PythonCmd --version 2>&1)
@@ -111,7 +116,14 @@ if ($NeedTemporaryInstall) {
 
 # ---- 🏗️ 5. Create Virtual Environment ----
 Write-Host (_ "create_venv" @($TargetVenvDir)) -ForegroundColor Gray
-Start-Process $GlobalPythonPath -ArgumentList "-m venv $TargetVenvDir --with-pip" -Wait
+
+# 【绝杀 Bug 2】：增加空值判断保护机制
+if ([string]::IsNullOrEmpty($GlobalPythonPath) -or -not (Test-Path $GlobalPythonPath)) {
+    Write-Host (_ "err_fatal" @("Python executable path is invalid or empty.")) -ForegroundColor Red
+    Exit 1
+}
+
+Start-Process $GlobalPythonPath -ArgumentList "-m venv `"$TargetVenvDir`" --with-pip" -Wait
 if (-not (Test-Path $TargetVenvDir)) {
     Write-Host (_ "err_fatal" @("Failed to construct VENV container.")) -ForegroundColor Red
     Exit 1
@@ -130,7 +142,7 @@ if ($IsWindows) {
 if ($HasRequirements) {
     Write-Host (_ "sync_deps") -ForegroundColor Gray
     Start-Process $VENV_PYTHON -ArgumentList "-m pip install --upgrade pip -q" -Wait
-    Start-Process $VENV_PIP -ArgumentList "install -r $REQUIREMENTS" -Wait
+    Start-Process $VENV_PIP -ArgumentList "install -r `"$REQUIREMENTS`"" -Wait
 
     if (Get-Content $REQUIREMENTS | Select-String "playwright" -Quiet) {
         Start-Process $VENV_PYTHON -ArgumentList "-m playwright install chromium" -Wait
