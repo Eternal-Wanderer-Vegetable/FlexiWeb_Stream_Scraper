@@ -1,31 +1,10 @@
 # =====================================================================
-# 🚀 Universal Python Environment Provisioning Framework (Cross-Platform)
+#  Universal Python Environment Provisioning Framework (Safe English)
 # =====================================================================
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
-# ---- 🌐 1. 全球多语言本地化字典 ----
-$CURRENT_LANG = "en"
-if ($PSCulture -match "zh") { $CURRENT_LANG = "zh" }
-
+# ---- 🌐 1. Pure English Localization Dictionary (Immune to Encoding Bugs) ----
 $I18N = @{
-    "zh" = @{
-        "start"            = "[*] 启动通用自动化环境构建引擎..."
-        "check_py"         = "[*] 正在扫描系统 Python 拓扑结构..."
-        "py_match"         = "[√] 成功命中匹配的系统 Python 版本: {0}"
-        "py_mismatch"      = "[!] 系统 Python 版本 ({0}) 与预期目标 ({1}) 不符。"
-        "py_missing"       = "[!] 系统未检测到任何 Python 动力源。"
-        "download_py"      = "[*] 正在从官方镜像安全拉取临时 Python 安装包 [{0}]..."
-        "install_py"       = "[*] 正在执行全自动化静默供给 (请稍候 1-2 分钟)..."
-        "create_venv"      = "[*] 正在目标路径下筑巢原生虚拟环境 venv -> [{0}]..."
-        "venv_success"     = "[√] 虚拟环境底层构建成功。"
-        "sync_deps"        = "[*] 正在通过隔离管道同步第三方依赖库 (requirements.txt)..."
-        "clean_up"         = "[*] 核心构建完毕。正在物理卸载临时托管的 Python，防止污染宿主环境..."
-        "clean_success"    = "[√] 临时环境释放完毕，全局空间已恢复纯净。"
-        "success_banner"   = "[√] 自动化环境部署完美收官！"
-        "run_hint"         = "提示：你现在可以随时在终端执行以下命令直接启动程序："
-        "warn_req_missing" = "[!_!] 未检测到 requirements.txt 配置文件。脚本将自动降级：为你构建一个绝对纯净的 .venv 环境。"
-        "err_fatal"        = "[ERROR] 致命错误: {0}"
-    }
     "en" = @{
         "start"            = "[*] Launching Universal Automated Provisioning Engine..."
         "check_py"         = "[*] Scanning system Python topology..."
@@ -47,20 +26,18 @@ $I18N = @{
 }
 
 function _($key, $args_list) {
-    $lang = $I18N[$CURRENT_LANG]
-    if (-not $lang) { $lang = $I18N["en"] }
+    $lang = $I18N["en"]
     $text = $lang[$key]
     if (-not $text) { $text = $key }
     if ($args_list) { return $text -f $args_list }
     return $text
 }
 
-# ---- ⚙️ 2. 通用动态参数配置定义 ----
+# ---- ⚙️ 2. Configuration & Parameter Definition ----
 $PROJECT_ROOT = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $VERSION_FILE = Join-Path $PROJECT_ROOT "python_version.txt"
 $REQUIREMENTS = Join-Path $PROJECT_ROOT "requirements.txt"
 
-# 动态读取预设版本
 $TARGET_VERSION = "3.11.9" 
 if (Test-Path $VERSION_FILE) {
     $TARGET_VERSION = (Get-Content $VERSION_FILE).Trim()
@@ -72,14 +49,13 @@ param (
 
 Write-Host (_ "start") -ForegroundColor Cyan
 
-# 🛠️ 【改造点 1】：解绑硬性中断，若缺失文件则打印警告并标记状态
 $HasRequirements = $true
 if (-not (Test-Path $REQUIREMENTS)) {
     Write-Host (_ "warn_req_missing") -ForegroundColor Yellow
     $HasRequirements = $false
 }
 
-# ---- 🔍 3. 检查系统 Python 版本号拓扑 ----
+# ---- 🔍 3. Check System Python Version ----
 Write-Host (_ "check_py") -ForegroundColor Gray
 $PythonCmd = if ($IsWindows) { "python" } else { "python3" }
 $HasPython = Get-Command $PythonCmd -ErrorAction SilentlyContinue
@@ -104,7 +80,7 @@ if ($HasPython) {
     Write-Host (_ "py_missing") -ForegroundColor Yellow
 }
 
-# ---- 📥 4. 跨平台动态静默安装临时 Python ----
+# ---- 📥 4. Install Temporary Python If Needed ----
 $InstallerPath = ""
 if ($NeedTemporaryInstall) {
     if ($IsWindows) {
@@ -133,7 +109,7 @@ if ($NeedTemporaryInstall) {
     }
 }
 
-# ---- 🏗️ 5. 在用户指定目录下创建独立的 Venv 空间 ----
+# ---- 🏗️ 5. Create Virtual Environment ----
 Write-Host (_ "create_venv" @($TargetVenvDir)) -ForegroundColor Gray
 Start-Process $GlobalPythonPath -ArgumentList "-m venv $TargetVenvDir --with-pip" -Wait
 if (-not (Test-Path $TargetVenvDir)) {
@@ -142,7 +118,6 @@ if (-not (Test-Path $TargetVenvDir)) {
 }
 Write-Host (_ "venv_success") -ForegroundColor Green
 
-# 锁闭 Venv 内部的执行管道
 if ($IsWindows) {
     $VENV_PYTHON = Join-Path $TargetVenvDir "Scripts\python.exe"
     $VENV_PIP    = Join-Path $TargetVenvDir "Scripts\pip.exe"
@@ -151,19 +126,18 @@ if ($IsWindows) {
     $VENV_PIP    = Join-Path $TargetVenvDir "bin/pip"
 }
 
-# ---- 📦 6. 【改造点 2】：条件判定：仅在存在配置文件时，执行第三方依赖库安装 ----
+# ---- 📦 6. Install Dependencies ----
 if ($HasRequirements) {
     Write-Host (_ "sync_deps") -ForegroundColor Gray
     Start-Process $VENV_PYTHON -ArgumentList "-m pip install --upgrade pip -q" -Wait
     Start-Process $VENV_PIP -ArgumentList "install -r $REQUIREMENTS" -Wait
 
-    # 检测并初始化 playwright
     if (Get-Content $REQUIREMENTS | Select-String "playwright" -Quiet) {
         Start-Process $VENV_PYTHON -ArgumentList "-m playwright install chromium" -Wait
     }
 }
 
-# ---- 🧹 7. 动态卸载临时 Python，消灭污染 ----
+# ---- 🧹 7. Uninstall Temporary Python to Prevent Host Pollution ----
 if ($NeedTemporaryInstall -and $IsWindows -and (Test-Path $InstallerPath)) {
     Write-Host (_ "clean_up") -ForegroundColor Yellow
     Start-Process -FilePath $InstallerPath -ArgumentList "/passive /uninstall" -Wait
@@ -171,9 +145,9 @@ if ($NeedTemporaryInstall -and $IsWindows -and (Test-Path $InstallerPath)) {
     Write-Host (_ "clean_success") -ForegroundColor Green
 }
 
-# ---- 🎉 8. 完美收官 ----
+# ---- 🎉 8. Success Banner ----
 Write-Host "`n=====================================================================" -ForegroundColor Green
 Write-Host (_ "success_banner") -ForegroundColor Green
 Write-Host "=====================================================================" -ForegroundColor Green
 Write-Host (_ "run_hint")
-Write-Host "    $VENV_PYTHON your_script.py`n" -ForegroundColor Yellow
+Write-Host "    $VENV_PYTHON main.py`n" -ForegroundColor Yellow
