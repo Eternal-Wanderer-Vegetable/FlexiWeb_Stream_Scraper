@@ -20,7 +20,10 @@ echo ------------------------------------------------------------
 
 set "PY_CMD="
 where python >nul 2>nul
-if %errorlevel% eq 0 set "PY_CMD=python"
+set "WHERE_PY_ERR=%errorlevel%"
+if "%WHERE_PY_ERR%"=="0" (
+    set "PY_CMD=python"
+)
 
 if "%PY_CMD%"=="" (
     echo [*] Downloading specified Python package [%TARGET_VERSION%]...
@@ -32,7 +35,7 @@ if "%PY_CMD%"=="" (
         goto :ERROR_EXIT
     )
     
-    echo [*] Executing silent automated deployment (Please wait 1-2 minutes)...
+    echo [*] Executing silent automated deployment ^(Please wait 1-2 minutes)...
     start /wait "" "%TEMP%\temp_py.exe" /passive InstallAllUsers=0 Include_pip=1 PrependPath=0 AssociateFiles=0 ShortCuts=0
     
     set "VER_SHORT=%TARGET_VERSION:.=%"
@@ -56,7 +59,7 @@ if exist requirements.txt (
     ".venv\Scripts\pip.exe" install -r requirements.txt
     
     findstr /C:"playwright" requirements.txt >nul
-    if %errorlevel% eq 0 (
+    if not errorlevel 1 (
         echo [*] Installing Chromium browser kernel...
         ".venv\Scripts\python.exe" -m playwright install chromium
     )
