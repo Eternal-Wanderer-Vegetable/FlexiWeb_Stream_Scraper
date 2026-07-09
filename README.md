@@ -175,7 +175,7 @@ flexiweb-stream-scraper/
 ├── python_version.txt           # Target System Blueprint Requirements (e.g., 3.11.9)
 ├── config/
     ├── chatgpt.json             # Built-in AI website chat text HTML extraction configuration
-│   ├── deepseek.json            
+    ├── deepseek.json            
     ├── ... 
 │   ├── webhooks.json            # Downstream Webhook Route Matrix Definitions
 │   └── i18n.json                # Core Localization Multi-Language Dictionary

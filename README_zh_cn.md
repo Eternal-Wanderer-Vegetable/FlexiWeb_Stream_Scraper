@@ -172,7 +172,7 @@ flexiweb-stream-scraper/
 ├── python_version.txt           # 预设期望的 Python 版本号 (如 3.11.9)
 ├── config/
     ├── chatgpt.json             # 内置AI网站聊天文本HTML提取配置
-│   ├── deepseek.json            
+    ├── deepseek.json            
     ├── ... 
 │   ├── webhooks.json            # 下游 Webhook 广播配置
 │   └── i18n.json                # 核心多语言本地化字典
