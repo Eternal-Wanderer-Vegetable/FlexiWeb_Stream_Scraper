@@ -204,6 +204,6 @@ Heartfelt thanks to @t1mb2rg for insightful exchanges that inspired core archite
 
 Special thanks to superuika!,Skittle-Neko for participating in testing and submitting bug reports.
 
-Special thanks to @Skittle-Neko for suggestions on improving win_start.bat.
+Special thanks to Skittle-Neko for suggestions on improving win_start.bat.
 
 This utility undergoes proactive expansion and optimization. If it facilitates your workflows, drop a ⭐ to show your support! For feedback or feature suggestions, submit an Issue, or reach out directly via 1694717255@qq.com.
