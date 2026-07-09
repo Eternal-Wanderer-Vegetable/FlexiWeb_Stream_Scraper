@@ -202,8 +202,8 @@ This asset is licensed under the terms of the MIT License. Feel free to use, mod
 
 Heartfelt thanks to @t1mb2rg for insightful exchanges that inspired core architectural elements, alongside the profound backend infrastructure of Gemini, DeepSeek, and open-source milestones like Playwright and FastAPI.
 
-Special thanks to superuika!,Skittle-Neko for participating in testing and submitting bug reports.
+Special thanks to superuika!,@Skittle-Neko for participating in testing and submitting bug reports.
 
-Special thanks to Skittle-Neko for suggestions on improving win_start.bat.
+Special thanks to @Skittle-Neko for suggestions on improving win_start.bat.
 
 This utility undergoes proactive expansion and optimization. If it facilitates your workflows, drop a ⭐ to show your support! For feedback or feature suggestions, submit an Issue, or reach out directly via 1694717255@qq.com.

@@ -199,8 +199,8 @@ flexiweb-stream-scraper/
 
 感谢与@t1mb2rg交流得到的灵感，Gemini、Deepseek等优秀模型以及 Playwright 、 FastAPI 等优秀开源社区的支持。
 
-感谢superuika！，Skittle-Neko参与了测试工作并提交了错误报告。
+感谢superuika！，@Skittle-Neko参与了测试工作并提交了错误报告。
 
-感谢Skittle-Neko对win_start.bat提出的修改意见。
+感谢@Skittle-Neko对win_start.bat提出的修改意见。
 
 本项目仍在持续开发与改进中。如果这个工具对你有帮助，别忘了点个 ⭐ 支持！如果有任何问题或建议，请提交 Issue，也可以发送邮件至1694717255@qq.com。
