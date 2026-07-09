@@ -25,7 +25,7 @@ FlexiWeb Stream Scraper 是一个仿照各个AI企业提供的API服务，基于
   内置中英文双语界面和提示信息，可根据系统语言或启动参数自动切换。
 
 - **🔌 一键式环境部署**  
-  提供跨平台 PowerShell 自动化脚本（`universal_setup.ps1`），并且根据对应系统配备了一键启动的入口脚本，自动匹配 Python 版本并创建干净的虚拟环境。
+  根据对应系统配备了一键启动的入口脚本（win_start.bat,linux_start.sh），自动匹配 Python 版本并创建干净的虚拟环境。
 
 - **📝 Markdown 日志持久化**  
   每次对话自动生成结构化的 Markdown 日志文件，方便排查问题，查阅和分享。
@@ -171,7 +171,9 @@ flexiweb-stream-scraper/
 ├── requirements.txt             # 跨平台轻量化依赖清单
 ├── python_version.txt           # 预设期望的 Python 版本号 (如 3.11.9)
 ├── config/
-│   ├── deepseek.json            # 内置AI 网站抓取策略配置
+    ├── chatgpt.json             # 内置AI网站聊天文本HTML提取配置
+│   ├── deepseek.json            
+    ├── ... 
 │   ├── webhooks.json            # 下游 Webhook 广播配置
 │   └── i18n.json                # 核心多语言本地化字典
 ├── extensions/                  # 浏览器扩展目录（如 GHelper）
@@ -197,6 +199,8 @@ flexiweb-stream-scraper/
 
 感谢与@t1mb2rg交流得到的灵感，Gemini、Deepseek等优秀模型以及 Playwright 、 FastAPI 等优秀开源社区的支持。
 
-感谢superuika！参与了测试工作并提交了错误报告。
+感谢superuika！，Skittle-Neko参与了测试工作并提交了错误报告。
+
+感谢Skittle-Neko对win_start.bat提出的修改意见。
 
 本项目仍在持续开发与改进中。如果这个工具对你有帮助，别忘了点个 ⭐ 支持！如果有任何问题或建议，请提交 Issue，也可以发送邮件至1694717255@qq.com。

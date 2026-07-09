@@ -12,4 +12,5 @@ __pycache__/
 *.pyd
 .DS_Store
 Thumbs.db
+List_of_bugs_to_be_fixed.txt
 " -Encoding utf8

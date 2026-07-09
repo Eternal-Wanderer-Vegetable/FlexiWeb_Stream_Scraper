@@ -27,7 +27,7 @@ Whether for data collection, content archiving, or building an AI middleware pip
   Built-in English and Chinese localized localizations for both the UI and terminal messages, adapting smoothly based on system localizations or explicit boot flags.
 
 - **🔌 1-Click Environment Provisioning**  
-  Bundled with a universal cross-platform PowerShell automation script (`universal_setup.ps1`), backed by dedicated platform-native bootstrapper wrappers. It matches target Python versions and constructs isolated, pristine virtual environments natively.
+  Equipped with one-click startup scripts tailored for different systems (win_start.bat, linux_start.sh), which automatically detect the Python version and create a clean virtual environment.
 
 - **📝 Persistent Markdown Logs**  
   Automatically generates structured Markdown log files for every conversation, making troubleshooting, reviewing, and sharing effortless.
@@ -174,7 +174,9 @@ flexiweb-stream-scraper/
 ├── requirements.txt             # Lightweight Cross-Platform Dependency Matrix
 ├── python_version.txt           # Target System Blueprint Requirements (e.g., 3.11.9)
 ├── config/
-│   ├── deepseek.json            # DeepSeek Scraper Strategy Engine Configuration
+    ├── chatgpt.json             # Built-in AI website chat text HTML extraction configuration
+│   ├── deepseek.json            
+    ├── ... 
 │   ├── webhooks.json            # Downstream Webhook Route Matrix Definitions
 │   └── i18n.json                # Core Localization Multi-Language Dictionary
 ├── extensions/                  # Persistent Virtual Browser Extension Layer (e.g., GHelper)
@@ -200,6 +202,8 @@ This asset is licensed under the terms of the MIT License. Feel free to use, mod
 
 Heartfelt thanks to @t1mb2rg for insightful exchanges that inspired core architectural elements, alongside the profound backend infrastructure of Gemini, DeepSeek, and open-source milestones like Playwright and FastAPI.
 
-Special thanks to superuika! for participating in testing and submitting bug reports.
+Special thanks to superuika!,Skittle-Neko for participating in testing and submitting bug reports.
+
+Special thanks to @Skittle-Neko for suggestions on improving win_start.bat.
 
 This utility undergoes proactive expansion and optimization. If it facilitates your workflows, drop a ⭐ to show your support! For feedback or feature suggestions, submit an Issue, or reach out directly via 1694717255@qq.com.
