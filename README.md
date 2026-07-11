@@ -78,7 +78,9 @@ The background engine handles the following workflows automatically:
 * Purges temporary installers to maintain absolute, zero-pollution workspace conditions on host platforms.
 
 💡 Note: 
+
 1.If requirements.txt is missing, the framework will gracefully fall back to configuring a pristine virtual container environment, enabling manual installation of required packages later.
+
 2.If you're in mainland China, you can choose the Tsinghua University Mirror in the script to get faster download speeds and avoid download errors that might prevent all Python third-party libraries from being successfully installed.
 
 ### 4. Configure Scraping Rules
