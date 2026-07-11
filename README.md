@@ -77,7 +77,9 @@ The background engine handles the following workflows automatically:
 * Automates silent browser binary initialization for Playwright Chromium instances.
 * Purges temporary installers to maintain absolute, zero-pollution workspace conditions on host platforms.
 
-💡 Note: If requirements.txt is missing, the framework will gracefully fall back to configuring a pristine virtual container environment, enabling manual installation of required packages later.
+💡 Note: 
+1.If requirements.txt is missing, the framework will gracefully fall back to configuring a pristine virtual container environment, enabling manual installation of required packages later.
+2.If you're in mainland China, you can choose the Tsinghua University Mirror in the script to get faster download speeds and avoid download errors that might prevent all Python third-party libraries from being successfully installed.
 
 ### 4. Configure Scraping Rules
 
@@ -177,8 +179,8 @@ flexiweb-stream-scraper/
     ├── chatgpt.json             # Built-in AI website chat text HTML extraction configuration
     ├── deepseek.json            
     ├── ... 
-│   ├── webhooks.json            # Downstream Webhook Route Matrix Definitions
-│   └── i18n.json                # Core Localization Multi-Language Dictionary
+    ├── webhooks.json            # Downstream Webhook Route Matrix Definitions
+    └── i18n.json                # Core Localization Multi-Language Dictionary
 ├── extensions/                  # Persistent Virtual Browser Extension Layer (e.g., GHelper)
 ├── logs/                        # Auto-Generated Structured Markdown Logs Target Directory
 └── browser_user_data/           # Persistent User Data Storage Container Contexts

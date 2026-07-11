@@ -53,6 +53,26 @@ if not exist .venv\ (
     goto :ERROR_EXIT
 )
 
+set "PIP_INDEX_OPT="
+if exist requirements.txt (
+    echo.
+    echo ============================================================
+    echo   Select Pip Dependency Mirror Source 
+    echo ============================================================
+    echo   [1] Tsinghua University Mirror 
+    echo   [2] Default Official Upstream Source 
+    echo ============================================================
+    set /p "CHOICE=Please enter your choice [1 or 2] (Default is 1): "
+    
+    if "%CHOICE%"=="" set "CHOICE=1"
+    if "%CHOICE%"=="1" (
+        echo [*] Mirror activated: Tsinghua University Source.
+        set "PIP_INDEX_OPT=-i https://pypi.tuna.tsinghua.edu.cn/simple"
+    ) else (
+        echo [*] Keeping official default upstream source.
+    )
+    echo ============================================================
+)
 if exist requirements.txt (
     echo [*] Synchronizing third-party dependencies...
     ".venv\Scripts\python.exe" -m pip install --upgrade pip -q

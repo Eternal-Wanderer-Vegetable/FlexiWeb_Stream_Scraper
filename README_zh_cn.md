@@ -74,7 +74,9 @@ chmod +x ./Linux_start.sh
 * 自动安装 Playwright 的 Chromium 浏览器驱动
 * 清理临时文件，不污染宿主机环境
 
-💡 提示：若没有 requirements.txt，脚本仍会创建绝对纯净的虚拟环境，你可以后续手动安装所需包。
+💡 提示：
+1.若没有 requirements.txt，脚本仍会创建绝对纯净的虚拟环境，你可以后续手动安装所需包。
+2.如果你位于中国大陆地区，你可以在脚本中选择清华镜像源（Tsinghua University Mirror）来获得更快的下载速度及避免出现下载异常导致无法成功安装全部依赖的python第三方库。
 
 ### 4. 配置 AI 网站策略
 
@@ -174,8 +176,8 @@ flexiweb-stream-scraper/
     ├── chatgpt.json             # 内置AI网站聊天文本HTML提取配置
     ├── deepseek.json            
     ├── ... 
-│   ├── webhooks.json            # 下游 Webhook 广播配置
-│   └── i18n.json                # 核心多语言本地化字典
+    ├── webhooks.json            # 下游 Webhook 广播配置
+    └── i18n.json                # 核心多语言本地化字典
 ├── extensions/                  # 浏览器扩展目录（如 GHelper）
 ├── logs/                        # 结构化 Markdown 日志自动输出目录
 └── browser_user_data/           # 浏览器持久化用户数据上下文
