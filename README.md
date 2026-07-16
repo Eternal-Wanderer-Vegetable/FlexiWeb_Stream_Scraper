@@ -204,7 +204,7 @@ This asset is licensed under the terms of the MIT License. Feel free to use, mod
 
 ## 🌟 Acknowledgements
 
-Heartfelt thanks to @t1mb2rg for insightful exchanges that inspired core architectural elements, alongside the profound backend infrastructure of Gemini, DeepSeek, and open-source milestones like Playwright and FastAPI.
+Heartfelt thanks to @t1mb2rg for insightful exchanges that inspired core architectural elements, alongside the profound backend infrastructure of Gemini, DeepSeek, and open-source milestones like `Playwright`and`FastAPI`.
 
 Special thanks to superuika!,@Skittle-Neko for participating in testing and submitting bug reports.
 

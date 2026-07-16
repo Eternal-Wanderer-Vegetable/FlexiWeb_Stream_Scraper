@@ -201,7 +201,7 @@ flexiweb-stream-scraper/
 
 ## 🌟 致谢
 
-感谢与@t1mb2rg交流得到的灵感，Gemini、Deepseek等优秀模型以及 Playwright 、 FastAPI 等优秀开源社区的支持。
+感谢与@t1mb2rg交流得到的灵感，Gemini、Deepseek等优秀模型以及`Playwright`、`FastAPI`等优秀开源社区python库的支持。
 
 感谢superuika！，@Skittle-Neko参与了测试工作并提交了错误报告。
 
